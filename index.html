@@ -133,7 +133,7 @@ db.dropTables("users");
                 </div>
                 <div class="col-xs-12 col-sm-12 article-content">
                     <p>
-                        Um eine Tabelle zu leeren, muss die Funktion "turncate" mit einem Array aufgerufen werden, welches die zu leerenden Tabellen beinhaltet.
+                        Um eine Tabelle zu leeren, muss die Funktion "turncate" mit einem Array oder String aufgerufen werden, welches die zu leerenden Tabellen beinhaltet.
                     </p>
 
 <pre><code>
@@ -328,6 +328,71 @@ db.fetchOne("SELECT * FROM users", [], function (data) {
                 </div>
             </article>
             <!-- FETCHONE END -->
+
+            <!-- EXECUTE START -->
+            <article class="row">
+                <div id="execute" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>SQL Ausführen</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <p>
+                        Um nur einen SQL Befehl auszuführen kann die "execute" Funktion verwendet werden welche mit folgenden Parametern aufzurufen ist:<br>
+                        SQL Select statement<br>
+                        where Array (optional)<br>
+                        callback Funktion (optional)
+                    </p>
+
+<pre><code>
+/* Aufruf des SimpleWebSQL "execute" Befehl's */
+db.execute('DROP TABLE users');
+</code></pre>
+                </div>
+            </article>
+            <!-- EXECUTE END -->
+
+            <!-- EXTENDS START -->
+            <article class="row">
+                <div id="extends" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>Framework erweitern</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <p>
+                        Um eigene Funktionen zu dem Framework hinzuzufügen gehen Sie bitte wie im folgenden Beispiel vor:
+                    </p>
+
+<pre><code>
+/* Erweitern des SimpleWebSQL Frameworks */
+db.dropOneTable = function(tableName){
+    db.execute("DROP TABLE" + tableName);
+};
+</code></pre>
+                </div>
+            </article>
+            <!-- EXTENDS END -->
+
+            <!-- HANDLER START -->
+            <article class="row">
+                <div id="handler" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>Custom Handler</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <p>
+                       Um einen eigenen Error oder Success Handler zu verwenden, <br>
+                        kann einfach nach einbinden des JS Files der Jeweilige Handler Überschrieben werden:
+                    </p>
+
+<pre><code>
+/* Überschreiben der Handler des SimpleWebSQL Frameworks */
+db.errorHandler = function (ressource, error) {
+    console.error(error.message)
+}
+db.successHandler = function (ressource, result) {
+    console.info(result)
+}
+</code></pre>
+                </div>
+            </article>
+            <!-- HANDLER END -->
         </div>
     </section>
 </main>
