@@ -124,12 +124,12 @@ if (typeof DBNAME != "undefined") {
                 return true;
             }
         },
-        turncate: function (tables) {
+        truncate: function (tables) {
             if (typeof tables == "string") {
-                this.execute('DROP TABLE ' + data);
+                this.execute('TRUNCATE TABLE ' + data);
             } else {
                 for (a = 0; a < tables.length; a++) {
-                    statement = "TURNCATE TABLE " + tables[a];
+                    statement = "TRUNCATE TABLE " + tables[a];
                     db.execute(statement);
                 }
             }
