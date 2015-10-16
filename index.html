@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web SQL Framework</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/custom.css">
+    <link rel="stylesheet" href="static/css/darkula.css">
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script src="static/js/pageLogic.js"></script>
+</head>
+<body>
+<nav class="container-fluid">
+
+</nav>
+<main class="container">
+    <header class="row">
+        <div class="col-xs-12 page-title-helper">
+            <h1 id="page-title">Web SQL Framework</h1>
+        </div>
+    </header>
+
+    <!-- INSTALL  START -->
+    <section class="row">
+        <div class="col-xs-12">
+            <article class="row">
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <h2>About</h2>
+
+                    <p>
+                        Bei simpleWebSQL handelt es sich um ein Framework für Web SQL.<br>
+                        SimpleWebSQL kann einfach heruntergeladen und in jede Web App integriert werden.<br>
+                        Kompatibel mit unter <a href="http://phonegap.com/" target="_blank">PhoneGap</a> und <a href="http://cordova.apache.org/ " target="_blank">Cordova</a>, entwickelt von <a
+                            href="http://chrisjp.kochab.ubserspace.de" target="_blank">ChristophJP</a></p>
+                        <a href="demo.html" class="btn btn-primary animate">Zur Demo</a>
+                </div>
+            </article>
+            <article class="row">
+                <div id="install" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>Installation</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    Folgendes muss in den "head" implementiert werden:
+                    <pre><code>
+&lt;script>
+    /* Definiert den Datenbanknamen */
+    var DBNAME = "FancyDB";
+&lt;/script><br>
+&lt;script src="simpleWebSQL.js">&lt;/script>
+                    </code></pre>
+                    <p>Alle Funktionen können ab nun im vollen Umfang genutzt werden.</p>
+
+                    <p>
+                        Die Versionen des simpleWebSQL Framework können hier heruntergeladen werden.
+                    </p>
+                    <a href="static/js/simpleWebSQL.min.js" class="btn btn-primary animate">Download der komprimierten Version</a><br>
+                    <a href="sql.zip" class="btn btn-primary animate">Komplettdownload inklusive Demo</a><br>
+                    <a href="static/js/simpleWebSQL.js" class="btn btn-primary animate">Download der Entwickler Version</a>
+                </div>
+            </article>
+            <!-- INSTALL END -->
+
+            <!-- CREATE  START -->
+            <article class="row">
+                <div id="create" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>Tabelle erstellen</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <p>
+                        Zum Erstellen einer Tabelle oder mehreren Tabellen sollte ein Objekt angelegt werden.<br>
+                        In dem definierten Objekt werden die Objektkeys als Tabellennamen verwendet.<br>
+                        In einer als Objekt definierten Tabelle werde die Objektkeys als Spaltennamen verwendet.<br>
+                        Die Spalten Eigenschaften werden als Array zusätzlich definiert.
+                    </p>
+
+                    <pre><code>
+var tables = {
+    /* Der Tabellenname ist der Objektkey */
+    users: {
+        /* Hier wird die Eigenschaft der "userName" Spalte als "Varchar" definiert */
+        userName: ["varchar"]
+    },
+    /* Der Tabellenname ist der Objektkey */
+    programming_languages: {
+        /* Hier wird die Eigenschaft der "name" Spalte als "Varchar" definiert */
+        name: ["varchar"]
+    },
+    /* Der Tabellenname ist der Objektkey */
+    mapping_table: {
+        /* Hier wird die Eigenschaft der "UID" Spalte als "Integer" definiert */
+        UID: ["int"],
+        /* Hier wird die Eigenschaft der "PID" Spalte als "Integer" definiert */
+        PID: ["int"]
+    }
+}
+/* Aufruf des SimpleWebSQL "creat" Befehl's */
+db.create(tables);
+                    </code>
+                    </pre>
+                </div>
+            </article>
+            <!-- CREATE  END -->
+
+            <!-- DROP TABLES  START -->
+            <article class="row">
+                <div id="dropTables" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>Tabellen löschen</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <p>
+                        Um mehrere Tabellen zu Löschen, muss ein Objekt mit den Keys, als der zu Löschende Tabellen in der "dropTables" Funktion übergeben werden.<br>
+                        In dem gezeigten Beispiel wird das "tables" Objekt, welches zum Erstellen verwendet wurde, auch zum Löschen verwendet.
+                    </p>
+
+                    <pre><code>
+/* Aufruf des SimpleWebSQL "dropTables" Befehl's */
+db.dropTables(tables);
+/* Alternativer Aufruf des SimpleWebSQL "dropTables" Befehl's */
+db.dropTables("users");
+                    </code></pre>
+                </div>
+            </article>
+            <!-- DROP TABLES END -->
+
+            <!-- TURNCATE  START -->
+            <article class="row">
+                <div id="turncate" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>Tabellen leeren</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <p>
+                        Um eine Tabelle zu leeren, muss die Funktion "turncate" mit einem Array aufgerufen werden, welches die zu leerenden Tabellen beinhaltet.
+                    </p>
+
+<pre><code>
+/* Aufruf des SimpleWebSQL "turncate" Befehl's */
+db.turncate(["users","programming_languages","mapping_table"]);
+/* Alternativer Aufruf des SimpleWebSQL "turncate" Befehl's */
+db.turncate("users");
+</code></pre>
+                </div>
+            </article>
+            <!-- TURNCATE END -->
+
+            <!-- DELETE START -->
+            <article class="row">
+                <div id="delete" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>Einträge löschen</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <p>
+                        Um Einträge in einer Tabelle zu löschen, muss die Funktion "delete" mit folgenden Parametern aufgerufen werden:<br>
+                        Tabellenname<br>
+                        where<br>
+                        limit(optional)
+                    </p>
+
+<pre><code>
+/* Aufruf des SimpleWebSQL "delete" Befehl's */
+db.delete("users", {userName: "ChristophJP"})
+</code></pre>
+                </div>
+            </article>
+            <!-- DELETE END -->
+
+            <!-- UPDATE START -->
+            <article class="row">
+                <div id="update" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>Eintrag updaten</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <p>
+                        Um einen Eintrag in einer Tabelle zu updaten, muss, die "update" Funktion mit folgenden Parametern aufgerufen werden:<br>
+                        Tabellenname<br>
+                        data<br>
+                        where(optional)<br>
+                        <br>
+                        Wenn mehrere Einträge geupdatet, werden sollen, muss die Anzahl der jeweiligen Objekten gleich sein
+                    </p>
+
+<pre><code>
+/* Aufruf des SimpleWebSQL "update" Befehl's */
+db.update("users", {userName: "Neuer Username"}, {userName: "Alter Username"})<br>
+/*
+ * Alternativer Aufruf des SimpleWebSQL "update" Befehl's
+ * Setzt zuerst alle user mit dem Namen "Alter Username" zu "neuer Username"
+ * danach werden alle user zu "Alle Usernamen" geupdatet da das 2 where Argument leer ist
+ */
+db.update("users", [{userName: "Neuer Username"}, {userName: "Alle Usernamen"}], [{userName: "Alter Username"},{}])
+</code></pre>
+                </div>
+            </article>
+            <!-- UPDATE END -->
+
+            <!-- INSERT START -->
+            <article class="row">
+                <div id="insert" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>Eintrag einfügen</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <p>
+                        Um einen Eintrag in einer Tabelle einzufügen, muss die "insert" Funktion mit folgenden Parametern aufgerufen werden:<br>
+                        Tabellenname<br>
+                        inserts<br>
+                        type (optional)<br>
+                        <br>
+                        Wenn "type" nicht gesetzt ist, wird ein Standart "INSERT INTO" verwendet.<br>
+                        Als "type" können folgende Parameter übergeben werden:<br>
+                        replace<br>
+                        ignore<br>
+
+                    </p>
+
+<pre><code>
+/* Aufruf des SimpleWebSQL "insert" Befehl's */
+db.insert("users", {userName: "Neuer Username1"}, {userName: "Alter Username2"})<br>
+/* Alternativer Aufruf des SimpleWebSQL "insert" Befehl's um Mehrere werte in eine Spalte zu Schreiben */
+db.insert("programming_languages", [{name: ["PHP", "jQuery", "SQL"]}]);
+</code></pre>
+                </div>
+            </article>
+            <!-- INSERT END -->
+
+            <!-- FETCHALL START -->
+            <article class="row">
+                <div id="fetchAll" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>FetchAll</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <p>
+                        Um alle Einträge abzufragen, muss die "fetchAll" Funktion mit folgenden Parametern verwendet werden:<br>
+                        SQL Select statement<br>
+                        where Array<br>
+                        callback Funktion<br>
+                    </p>
+
+<pre><code>
+/* Aufruf des SimpleWebSQL "fetchAll" Befehl's */
+db.fetchAll("SELECT * FROM users", [], function (data) {
+    console.log(data)
+});<br>
+/*
+ * Returns: {0:{userName:"ChristophJP"},1:{userName:"Christoph"}}
+ */
+</code></pre>
+                </div>
+            </article>
+            <!-- FETCHALL END -->
+
+            <!-- FETCHROW START -->
+            <article class="row">
+                <div id="fetchRow" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>FetchRow</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <p>
+                        Um Einträge einer Reihe abzufragen, muss die "fetchRow" Funktion, welche ein Objekt mit Spaltennamen und den Werten zurückgibt, mit folgenden Parametern verwendet werden:<br>
+                        SQL Select statement<br>
+                        where Array<br>
+                        callback Funktion<br>
+                    </p>
+
+<pre><code>
+/* Aufruf des SimpleWebSQL "fetchRow" Befehl's */
+db.fetchRow("SELECT * FROM users", [], function (data) {
+    console.log(data)
+});<br>
+/*
+ * Returns: {userName:"ChristophJP"}
+ */
+</code></pre>
+                </div>
+            </article>
+            <!-- FETCHROW END -->
+
+            <!-- FETCHARRAY START -->
+            <article class="row">
+                <div id="fetchArray" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>FetchArray</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <p>
+                        Um nur die Werte einer Reihe abzufragen, muss die "fetchArray" Funktion, welche einen Array zurückgibt, mit folgenden Parametern verwendet werden:<br>
+                        SQL Select statement<br>
+                        where Array<br>
+                        callback Funktion<br>
+                    </p>
+
+<pre><code>
+/* Aufruf des SimpleWebSQL "fetchArray" Befehl's */
+db.fetchArray("SELECT * FROM users", [], function (data) {
+    console.log(data)
+});<br>
+/*
+ * Returns: ["ChristophJP"]
+ */
+                    </code></pre>
+                </div>
+            </article>
+            <!-- FETCHARRAY END -->
+
+            <!-- FETCHONE START -->
+            <article class="row">
+                <div id="fetchOne" class="article-title col-xs-12 col-sm-12 col-md-12">
+                    <h2>FetchOne</h2>
+                </div>
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <p>
+                        Um nur einen Wert abzufragen, muss die "fetchOne" Funktion, welche nur einen String zurückgibt, mit folgenden Parametern verwendet werden:<br>
+                        SQL Select statement<br>
+                        where Array<br>
+                        callback Funktion
+                    </p>
+
+<pre><code>
+/* Aufruf des SimpleWebSQL "fetchOne" Befehl's */
+db.fetchOne("SELECT * FROM users", [], function (data) {
+    console.log(data)
+});<br>
+/*
+ * Returns: ["ChristophJP"]
+ */
+                    </code></pre>
+                </div>
+            </article>
+            <!-- FETCHONE END -->
+        </div>
+    </section>
+</main>
+</body>
+</html>
+

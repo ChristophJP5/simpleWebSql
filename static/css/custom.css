@@ -1,0 +1,114 @@
+
+@font-face {
+    font-family: DejaVuSansLight;
+    src: url(DejaVuSans-ExtraLight.ttf);
+}
+
+body {
+    font-family: DejaVuSansLight;
+    background-color: #ecf0f1;
+}
+
+header {
+    background-color: #e74c3c;
+    border-bottom: 2px solid #c0392b;
+    color: #fff;
+}
+
+section {
+    background-color: #fff;
+}
+
+.article-title {
+    background-color: #e74c3c;
+    color: #fff;
+    margin: 15px 0;
+}
+
+.btn-primary {
+    background-color: #e74c3c;
+    border: 0;
+    border-bottom: 2px solid #c0392b;
+    margin-bottom: 10px;
+}
+
+.btn-primary:hover {
+    background-color: #dc3e2d;
+    border-color: #bd3628;
+}
+
+.btn-primary:active:focus:visited {
+    background-color: #dc3e2d !important;
+    border-color: #cd2618 !important;
+}
+
+.animate {
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    -ms-transition: all 0.1s linear;
+    -o-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+
+.left {
+    margin-left: 40px;
+}
+
+nav {
+    background-color: #e74c3c;
+    display: none;
+    border: 0;
+    border-bottom: 2px solid #c0392b;
+    position: fixed;
+    padding: 0 15px;
+    top: 0;
+    width: 100%;
+    z-index: 10;
+}
+
+nav ul {
+    list-style: none;
+}
+
+nav ul, nav ul li {
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li a, nav ul li a:hover, nav ul li a:focus {
+    color: #fff;
+    display: block;
+    padding: 15px;
+    text-decoration: none;
+    width: 100%;
+}
+
+nav ul li a:hover, nav ul li a:focus {
+    text-shadow: 0 0 5px rgba(157, 24, 11, 1);
+}
+#menu-items {
+    display: none;
+    max-height: 300px;
+}
+#arrow {
+    border-style: solid;
+    border-width: 5px 0 5px 10px;
+    border-color: transparent transparent transparent rgba(157, 24, 11, 1);
+    display: inline-block;
+    height: 0;
+    margin-left: 5px;
+    width: 0;
+}
+.rotate-90 {
+    -moz-transform: rotate(90deg);
+    -webkit-transform: rotate(90deg);
+    -o-transform: rotate(90deg);
+    -ms-transform: rotate(90deg);
+    transform: rotate(90deg);
+}
+pre {
+    background-color: #2b2b2b;
+    padding-bottom: 0;
+    padding-top: 0;
+    margin-bottom: 20px;
+}

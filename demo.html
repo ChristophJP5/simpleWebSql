@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Web SQL Framework</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link rel="stylesheet" href="static/css/bootstrap.min.css">
+    <link rel="stylesheet" href="static/css/custom.css">
+    <link rel="stylesheet" href="static/css/darkula.css">
+    <script>
+        /*
+         * Create a fancy tables object
+         */
+        var DBNAME = "FancDB";
+        var tables = {
+            users: {
+                userName: ["varchar"]
+            },
+            programming_languages: {
+                name: ["varchar"]
+            },
+            mapping_table: {
+                UID: ["int"],
+                PID: ["int"]
+            }
+        }
+    </script>
+    <script src="static/js/simpleWebSQL.js"></script>
+    <script src="static/js/jquery.js"></script>
+    <script src="static/js/bootstrap.min.js"></script>
+    <script src="static/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+    <script>
+        // some init stuff
+        db.dropTables(tables); // Just to make sure everything is clear for developing
+        db.create(tables); // Just create my defined tables
+
+        // Insert some demo data to work with
+        db.insert("users", [{userName: ["ChristophJP", "Cyfl0w", "Hadische"]}]);
+        db.insert("programming_languages", [{name: ["PHP", "Phyton", "C#"]}]);
+        db.insert("mapping_table", [{UID: 1, PID: 1}, {UID: 2, PID: 3}, {UID: 3, PID: 2}]);
+
+        // User events incoming
+        $(document).ready(function () {
+            // Sites get loaded
+            fillSelect("selectPLanguages");
+        }).on("click", "#getLang", function () {
+            // User wants to get the programming language from an user
+            getProgrammingLanguage($("#selectPLanguages").find("[value='" + $("#selectPLanguages").val() + "']").text())
+        });
+
+        // This function fills a specified select element with users
+        function fillSelect (id){
+            db.fetchAll("SELECT userName FROM users", [], function (data) {
+                dataKeys = Object.keys(data)
+                $('#'+id).html("");
+                for (a = 0; a < dataKeys.length; a++) {
+                    $('#'+id).append('<option value="' + a + '">' + data[dataKeys[a]]["userName"] + '</option>');
+                }
+            });
+        }
+        function getProgrammingLanguage(username) {
+            // now here comes the magic
+            // just fetch one cause i want one result as simple text
+            db.fetchOne(
+                    "SELECT " +
+                        "name " +
+                    "FROM " +
+                        "mapping_table, " +
+                        "users, " +
+                        "programming_languages " +
+                    "WHERE " +
+                        "programming_languages.rowid = PID " +
+                    "AND " +
+                        "users.rowid = UID " +
+                    "AND " +
+                        "userName = ?", [username], function (data) {
+                        alert(data)
+                    }
+            )
+        }
+    </script>
+</head>
+<body>
+<main class="container">
+    <header class="row">
+        <div class="col-xs-12 page-title-helper">
+            <h1 id="page-title">Web SQL Framework</h1>
+        </div>
+    </header>
+
+    <!-- INSTALL  START -->
+    <section class="row">
+        <div class="col-xs-12">
+            <article class="row">
+                <div class="col-xs-12 col-sm-12 article-content">
+                    <h2>Demo</h2>
+
+                    <p>
+                        Hier befinden sich eine kurze Demos zu den Grundfunktionen des Frameworks.<br><br>
+                        Grundkonfiguration:
+                    </p>
+                    <pre>
+                        <code>
+var DBNAME = "FancyDB";
+tables = {
+    users: {
+        userName: ["varchar"]
+    },
+    programming_languages: {
+        name: ["varchar"]
+    },
+    mapping_table: {
+        UID: ["int"],
+        PID: ["int"]
+    }
+}
+                        </code>
+                    </pre>
+                    <p>Erstellen der Tabellen:</p>
+                    <pre>
+                        <code>
+// löschen aller Tabellen
+db.drop(tables);
+// erstellen aller Tabellen
+db.create(tables);
+                        </code>
+                    </pre>
+                    <p>Dummydaten werden in die Tabellen eingetragen:</p>
+                    <pre>
+                        <code>
+// Einfügen der Usern "ChristophJP", "Cyfl0w", "Hadische" in die Users Tabellle
+db.insert("users", [{userName: ["ChristophJP", "Cyfl0w", "Hadische"]}])
+// Einfügen der Programmiersprachen "PHP", "Phyton", "C#" in die programming_languages Tabellle
+db.insert("programming_languages", [{name: ["PHP", "Phyton", "C#"]}]);
+// Mapping zwischen den Usern und der Programmiersprachen
+db.insert("mapping_table", [{UID: 1, PID: 1}, {UID: 2, PID: 3}, {UID: 3, PID: 2}]);
+                        </code>
+                    </pre>
+                    <p>
+                        Nun befüllen wir das Folgende "Select" Element durch einen Klick auf den Button mit den Namen aus der "Users" Tabelle.
+                        <br>
+                        <div class="row">
+                            <div class="col-xs-12 col-md-4">
+                                <select class="form-control" id="selectUsers">
+                                </select>
+                            </div>
+                            <div class="col-xs-12 col-md-2">
+                                <div class="btn btn-primary" onclick="fillSelect('selectUsers')"> Select Befüllen</div>
+                            </div>
+                        </div>
+                    </p>
+                    <pre>
+                        <code>
+function fillSelect (id){
+    db.fetchAll("SELECT userName FROM users", [], function (data) {
+        dataKeys = Object.keys(data)
+        $('#'+id).html("");
+        for (a = 0; a < dataKeys.length; a++) {
+            $('#'+id).append('&lt;option value="' + a + '">' + data[dataKeys[a]]["userName"] + '&lt;/option>');
+        }
+    });
+}
+                        </code>
+                    </pre>
+                    <p>
+                        Nun erstellen wir eine Funktion welche durch übergeben eines Namen, die Programmiersprache eines Users zurückgibt.
+                    </p>
+                    <pre>
+                        <code>
+function getProgrammingLanguage(username) {
+    db.fetchOne(
+        "SELECT " +
+            "name " +
+        "FROM " +
+            "mapping_table, " +
+            "users, " +
+            "programming_languages " +
+        "WHERE " +
+            "programming_languages.rowid = PID " +
+        "AND " +
+            "users.rowid = UID " +
+        "AND " +
+            "userName = ?", [username], function (data) {
+            alert(data)
+    })
+}
+                        </code>
+                    </pre>
+                    <p>Zum Ausgeben der spezifischen Programmiersprache eines Users,<br>
+                        wählen Sie einen aus und bestätigen Sie Ihre Wahl mit einem Klick auf den Button</p>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-4">
+                            <select class="form-control" id="selectPLanguages">
+                            </select>
+                        </div>
+                        <div class="col-xs-12 col-md-2">
+                            <div class="btn btn-primary" id="getLang">Sprache Zeigen</div>
+                        </div>
+                    </div><br>
+                    <p>Bei Fragen und Anmerkungen schicken Sie einfach eine Mail an <a href="mailto:christophpolenz@yahoo.de">Christophpolenz@yahoo.de</a>.</p>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                </div>
+            </article>
+            <!-- FETCHONE END -->
+        </div>
+    </section>
+</main>
+</body>
+</html>
+
