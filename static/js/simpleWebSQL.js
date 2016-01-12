@@ -28,10 +28,10 @@ if (typeof DBNAME != "undefined") {
                 }
             }
             db.execute(statement, where, function (data, result) {
+                alert(JSON.stringify(result));
                 switch (type) {
                     case "array":
                         result = result.rows;
-                        alert(JSON.stringify(result));
                         keys = Object.keys(result);
                         value = [];
                         for (a = 0; a < keys.length; a++) {

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="BookmarkManager">
-    <bookmark url="file://$PROJECT_DIR$/static/js/simpleWebSQL.js" line="33" mnemonic="9" />
-  </component>
   <component name="ChangeListManager">
     <list default="true" id="ce5a5dae-1912-4ed8-a13d-a0c2120a368e" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/simpleWebSQL.js" afterPath="$PROJECT_DIR$/static/js/simpleWebSQL.js" />
@@ -50,8 +47,8 @@
       <file leaf-file-name="simpleWebSQL.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/static/js/simpleWebSQL.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.48079878">
-              <caret line="33" column="53" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="53" />
+            <state vertical-scroll-proportion="0.39784947">
+              <caret line="30" column="46" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
               <folding>
                 <element signature="n#!!doc" expanded="true" />
               </folding>
@@ -225,8 +222,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/static/js/simpleWebSQL.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.48079878">
-          <caret line="33" column="53" selection-start-line="33" selection-start-column="53" selection-end-line="33" selection-end-column="53" />
+        <state vertical-scroll-proportion="0.39784947">
+          <caret line="30" column="46" selection-start-line="30" selection-start-column="46" selection-end-line="30" selection-end-column="46" />
           <folding>
             <element signature="n#!!doc" expanded="true" />
           </folding>
