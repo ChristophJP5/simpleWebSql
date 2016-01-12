@@ -50,7 +50,12 @@ if (typeof DBNAME != "undefined") {
                         value = result[keys[0]]
                         break;
                     case "all":
-                        value = result.rows
+                        result = result.rows;
+                        //keys = Object.keys(result);
+                        value = [];
+                        for (a = 0; a < result.length; a++) {
+                            value.push(result.item(a));
+                        }
                         console.log(value)
                         break;
                 }
