@@ -28,13 +28,12 @@ if (typeof DBNAME != "undefined") {
                 }
             }
             db.execute(statement, where, function (data, result) {
-                alert(JSON.stringify(result.rows));
                 switch (type) {
                     case "array":
                         result = result.rows;
-                        keys = Object.keys(result);
+                        //keys = Object.keys(result);
                         value = [];
-                        for (a = 0; a < keys.length; a++) {
+                        for (a = 0; a < result.length; a++) {
                             row = result[a];
                             rowKeys = Object.keys(row);
                             for (b = 0; b < rowKeys.length; b++) {
@@ -43,15 +42,16 @@ if (typeof DBNAME != "undefined") {
                         }
                         break;
                     case "row":
-                        value = result.rows[0]
+                        value = result.rows.item(0)
                         break;
                     case "one":
-                        result = result.rows[0]
+                        result = result.rows.item(0)
                         keys = Object.keys(result);
                         value = result[keys[0]]
                         break;
                     case "all":
                         value = result.rows
+                        console.log(value)
                         break;
                 }
                 callback(value);
