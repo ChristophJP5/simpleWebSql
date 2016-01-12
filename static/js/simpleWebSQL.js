@@ -220,10 +220,10 @@ if (typeof DBNAME != "undefined") {
             }
         },
         errorHandler: function (ressource, error) {
-            console.error(error.message)
+            alert(error.message);
         },
         successHandler: function (ressource, result) {
-            //console.info(result)
+            alert("good", result);
         }
     }
 } else {
