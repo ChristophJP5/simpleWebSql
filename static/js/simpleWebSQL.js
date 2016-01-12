@@ -31,6 +31,7 @@ if (typeof DBNAME != "undefined") {
                 switch (type) {
                     case "array":
                         result = result.rows;
+                        alert(JSON.stringify(result));
                         keys = Object.keys(result);
                         value = [];
                         for (a = 0; a < keys.length; a++) {
@@ -220,10 +221,10 @@ if (typeof DBNAME != "undefined") {
             }
         },
         errorHandler: function (ressource, error) {
-            alert(error.message);
+            //alert(error.message);
         },
         successHandler: function (ressource, result) {
-            alert("good", result);
+            //alert("good", result);
         }
     }
 } else {
