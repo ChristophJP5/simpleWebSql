@@ -28,7 +28,7 @@ if (typeof DBNAME != "undefined") {
                 }
             }
             db.execute(statement, where, function (data, result) {
-                alert(JSON.stringify(result));
+                alert(JSON.stringify(result.rows));
                 switch (type) {
                     case "array":
                         result = result.rows;
