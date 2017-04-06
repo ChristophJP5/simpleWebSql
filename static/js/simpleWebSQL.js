@@ -1,7 +1,7 @@
 /*
  *
  * Developed by Christoph Polenz
- * http://chrisjp.kochab.uberspace.de
+ * http://christophjp.de
  * This Lines must be kept in the file
  *
  */
